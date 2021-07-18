@@ -13,6 +13,6 @@ use App\Helper\MyFuncs;
 */
  
 Route::get('/', function () {
-    return redirect()->route('admin.auth.login');
+    return redirect()->route('admin.login');
  
 });
