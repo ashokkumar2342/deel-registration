@@ -19,9 +19,7 @@ class RedirectIfNotAuthenticated
         if (!Auth::guard($guard)->check()) {
             return redirect()->route('admin.login');
         }
-        if (MyFuncs::isPermission()!=true) { 
-           dd('User have not permission for this page access.');
-        }
+        
         return $next($request);
     }
 }

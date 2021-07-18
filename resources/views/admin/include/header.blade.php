@@ -9,12 +9,12 @@
     </ul> 
     <ul class="navbar-nav ml-auto">       
       <li class="nav-item">
-        <a class="btn btn-lg" title="Sign Out" href="{{ route('logout') }}"
+        <a class="btn btn-lg" title="Sign Out" href="{{ route('admin.logout.get') }}"
                         onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();">
           <i class="fa fa-sign-out"></i>
         </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        <form id="logout-form" action="{{ route('admin.logout.get') }}" method="POST" style="display: none;">
            {{ csrf_field() }}
         </form>
       </li>

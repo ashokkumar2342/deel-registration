@@ -19,7 +19,7 @@
 <div class="col-lg-3 form-group">
 <label for="exampleInputEmail1">Block MCS</label>
 <span class="fa fa-asterisk"></span>
-<select name="block" class="form-control select2" id="block_select_box" onchange="callAjax(this,'{{ route('admin.Master.BlockWiseVillage') }}','village_select_box')">
+<select name="block" class="form-control select2" id="block_select_box">
     <option selected disabled>Select Block MCS</option> 
 </select>
 </div>
@@ -39,8 +39,8 @@
     <tbody>
         @foreach ($DistrictBlockAssigns as $DistrictBlockAssign)
                     <tr>
-                        <td>{{ $DistrictBlockAssign->Districts->name_l or ''}}</td> 
-                        <td>{{ $DistrictBlockAssign->Blocks->name_l or ''}}</td> 
+                        <td>{{ $DistrictBlockAssign->name_e or ''}}</td> 
+                        <td>{{ $DistrictBlockAssign->block_name or ''}}</td> 
                         <td>
                          <a title="Delete" class="btn btn-xs btn-danger" select-triger="user_id" onclick="if (confirm('Are you Sure delete')){callAjax(this,'{{ route('admin.Master.DistrictBlockAssignDelete',Crypt::encrypt($DistrictBlockAssign->id)) }}') } else{console_Log('cancel') }"  ><i class="fa fa-trash"></i></a>
                         </td> 

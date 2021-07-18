@@ -4,29 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Admin;
 use App\Http\Controllers\Controller;
-use App\Model\AcademicYear;
 use App\Model\BlocksMc;
-use App\Model\Cashbook;
-use App\Model\ClassType;
 use App\Model\District;
-use App\Model\Event\EventDetails;
-use App\Model\Exam\ClassTest;
-use App\Model\Homework;
-use App\Model\ParentRegistration;
-use App\Model\StudentAttendance;
-use App\Model\StudentFeeDetail;
-use App\Model\StudentRemark;
-use App\Model\StudentUserMap;
 use App\Model\Village;
-use App\Model\WardVillage;
-use App\Student;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Passport\createToken;
 use Storage;
+
 class DashboardController extends Controller
 {
     // public function __construct()
@@ -44,37 +31,14 @@ class DashboardController extends Controller
         $block=BlocksMc::count(); 
         $village=Village::count(); 
         
-        return view('admin.dashboard.dashboard',compact('District','block','village','wardVillage')); 
+        return view('admin.dashboard.dashboard',compact('District','block','village')); 
     }  
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showStudentDetails(Request $request)
-    {
-        $classes = ClassType::all();
-        $students = Student::all(); 
-        return view('admin/dashboard/studentDetails',compact('classes','students'))->render();
-    }
-    //show Student Registration Details 
-    public function showStudentRegistrationDetails(Request $request)
-    {
-        $classes = ClassType::all();
-       $students = ParentRegistration::all(); 
-        return view('admin/dashboard/studentRegistrationDetails',compact('classes','students'))->render();
-    }
+    
 
-    public function passportTokenCreate(){
-        $user = Admin::find(1);
-        // Creating a token without scopes...
-        $token = $user->createToken('Student')->accessToken;
+    // Last Line -------------------------------------
 
-        // Creating a token with scopes...
-       // $token = $user->createToken('My Token', ['place-orders'])->accessToken;
-        return $token;
-    }
+
 
     public function proFile()
     {

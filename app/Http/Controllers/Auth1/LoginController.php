@@ -46,16 +46,8 @@ class LoginController extends Controller
           $credentials = [
                      'email' => $request['email'],
                      'password' => $request['password'],
-                     'mobile_verify' => 1,
-                     'email_verify' => 1,
                  ];
-        $credentials2 = [
-                     'mobile' => $request['email'],
-                     'password' => $request['password'],
-                     'mobile_verify' => 1,
-                     'email_verify' => 1,
-                 ]; 
-            if(Auth::attempt($credentials ) || Auth::attempt($credentials2 )) {
+            if(Auth::attempt($credentials )) {
                  
                     return redirect('/home');
                  

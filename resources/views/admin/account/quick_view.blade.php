@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h3>Default Role Quick Menu</h3>
+                <h3>Quick Links</h3>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right"> 
@@ -20,7 +20,7 @@
                             <div class="form-group">
                                 {{ Form::label('role','Role',['class'=>' control-label']) }}                         
                               <div class="form-group">  
-                                     <select class="form-control" id="role_select_box"  data-table-without-pagination-disable-sorting="menu_role_table" multiselect-form="true"  name="role"  onchange="callAjax(this,'{{route('admin.account.role.default.menu')}}'+'?id='+this.value,'menu_list')" > 
+                                     <select class="form-control" id="role_select_box"  data-table-without-pagination-disable-sorting="menu_role_table" multiselect-form="true"  name="role"  onchange="callAjax(this,'{{route('admin.account.role.quick_menu')}}'+'?id='+this.value,'menu_list')" > 
                                       <option value="" disabled selected>Select User</option>
                                      @foreach ($roles as $role)
                                           <option value="{{ $role->id }}">{{ $role->name }}</option> 

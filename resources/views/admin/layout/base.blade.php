@@ -41,6 +41,7 @@
   <link rel="stylesheet" href="{{ asset('admin_asset/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css')}}">
   
   
+  
 
    
   
@@ -106,7 +107,7 @@
             <div class="pull-right hidden-xs">
            
             </div>
-            <strong>Copyright &copy; {{ date('Y') }} <a href="http://www.innovusine.com"></a>.</strong> All rights reserved.
+            <strong>Copyright &copy; {{ date('Y') }} <a href="#"></a>.</strong> All rights reserved.
         </footer>
 
         <!-- Add the sidebar's background. This div must be placed
@@ -166,6 +167,8 @@
 
 <script src="{{ asset('admin_asset/plugins/select2/js/select2.full.min.js') }}"></script>
 <script src="{{ asset('admin_asset/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
+<script src="{{ asset('admin_asset/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+
 
 
 
@@ -179,7 +182,10 @@
     <script>
       $( ".datepicker").datepicker({dateFormat:'dd-mm-yy'}); 
       $('.select2').select2();
-       //$('.multiselect').selectpicker(); 
+       
+      $(function () {
+        bsCustomFileInput.init();
+      });
         
     
        

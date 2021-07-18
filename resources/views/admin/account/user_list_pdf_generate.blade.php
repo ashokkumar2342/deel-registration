@@ -13,7 +13,6 @@
     @include('admin.include.boostrap')
 </head> 
 <body>
-    @include('schoolDetails.logo_header')
     <div class="row">
         <div class="col-lg-10" style="margin-left: 60px">
             <table id="dataTable" class="table table-striped table-hover table table-condensed table-bordered">
@@ -21,9 +20,9 @@
                     <tr>
                         <th>Sr.No.</th> 
                         <th>Name</th>
-                        <th>Mobile No</th> 
-                        <th class="text-nowrap">Date of Birth</th>
-                        <th>E-mail ID</th>
+                        <th>User Id</th>
+                        <th>Mobile No.</th> 
+                        <th class="text-nowrap">Status</th>
                         <th>Role</th> 
                     </tr>
                 </thead>
@@ -35,11 +34,11 @@
 
                     <tr>
                         <td>{{ $arrayId ++ }}</td> 
-                        <td>{{ $account->first_name }} {{ $account->first_last}}</td>
-                        <td>{{ $account->mobile }}</td> 
-                        <td>{{ date('d-m-Y',strtotime($account->dob)) }}</td>
+                        <td>{{ $account->first_name }} {{ $account->last_name}}</td>
                         <td>{{ $account->email }}</td>
-                        <td>{{ $account->roles->name }}</td> 
+                        <td>{{ $account->mobile }}</td> 
+                        <td>{{ $account->status }}</td>
+                        <td>{{ $account->name }}</td> 
                     </tr> 
                     @endforeach
                 </table>

@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h3>Default User Permission</h3>
+                <h3>User Permission</h3>
             </div> 
         </div> 
         <div class="card card-info"> 

@@ -7,23 +7,8 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) --> 
       @php
-            $accountSubMenuUrls = App\Helper\MyFuncs::mainMenu(1);
-            $configrations = App\Helper\MyFuncs::mainMenu(2);
-            $students = App\Helper\MyFuncs::mainMenu(3);
-            $Finances = App\Helper\MyFuncs::mainMenu(4);
-            $Homeworks = App\Helper\MyFuncs::mainMenu(8);
-            $Attendances = App\Helper\MyFuncs::mainMenu(9);
-            $Certificates = App\Helper\MyFuncs::mainMenu(10);
-            $FeeCertificates = App\Helper\MyFuncs::mainMenu(11);
-            $UserActivitys = App\Helper\MyFuncs::mainMenu(12);
-            $RegistrationForms = App\Helper\MyFuncs::mainMenu(13);
-            $Transports = App\Helper\MyFuncs::mainMenu(14);
-            $Exams = App\Helper\MyFuncs::mainMenu(15);
-            $SMSs = App\Helper\MyFuncs::mainMenu(16);
-            $menus=App\Helper\MyFuncs::showMenu();
-            $userHasMenus=App\Helper\MyFuncs::userHasMinu();
-            $menuTypes = App\Model\MinuType::whereIn('id',$userHasMenus)->orderBy('sorting_id','asc')->get();
-           
+            $menuTypes=App\Helper\MyFuncs::userHasMinu();
+            
          @endphp
 
          @foreach ($menuTypes as $menuType)

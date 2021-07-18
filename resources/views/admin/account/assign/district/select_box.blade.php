@@ -31,7 +31,7 @@
     <tbody>
         @foreach ($DistrictBlockAssigns as $DistrictBlockAssign)
                     <tr>
-                        <td>{{ $DistrictBlockAssign->Districts->name_l or ''}}</td> 
+                        <td>{{ $DistrictBlockAssign->name_e or ''}}</td> 
                         <td>
                             <a title="Delete" class="btn btn-xs btn-danger" select-triger="user_id" onclick="if (confirm('Are you Sure delete')){callAjax(this,'{{ route('admin.Master.DistrictsAssignDelete',Crypt::encrypt($DistrictBlockAssign->id)) }}') } else{console_Log('cancel') }"  ><i class="fa fa-trash"></i></a>
                         </td> 

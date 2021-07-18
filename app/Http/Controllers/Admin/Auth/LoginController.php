@@ -54,78 +54,10 @@ class LoginController extends Controller
         
     }
     
-    
-    public function searchVoter(){
-        return view('admin.auth.search');
-    }
-    public function searchVoterform($id)
-    {
-      $Districts=District::orderBy('name_e','ASC')->get();
-      if ($id==1) {
-      return view('admin.auth.search_form_epic',compact('Districts')); 
-      }
-      elseif ($id==2) {
-      return view('admin.auth.search_form',compact('Districts')); 
-      }
-      
-    }
-    public function searchDisBlock(Request $request)
-    {
-       try{
-           
-          $BlocksMcs=BlocksMc::where('districts_id',$request->id)->get(); 
-          return view('admin.master.block.value_select_box',compact('BlocksMcs'));
-        } catch (Exception $e) {
-            
-        }
-    }
-    public function searchBlockVillage(Request $request)
-    {
-       try{ 
-           
-          $Villages=Village::where('blocks_id',$request->id)->get(); 
-          return view('admin.master.village.value_select_box',compact('Villages'));
-        } catch (Exception $e) {
-            
-        }
-    }
-    public function searchVoterFilter(Request $request)
-    {
-      $rules=[ 
-              // 'village' => 'required', 
-        ];
-
-        $validator = Validator::make($request->all(),$rules);
-        if ($validator->fails()) {
-            $errors = $validator->errors()->all();
-            $response=array();
-            $response["status"]=0;
-            $response["msg"]=$errors[0];
-            return response()->json($response);// response as json
-        }
-        // $voters =Voter:: 
-        //          where('village_id',$request->village)
-        //        ->where(function($query) use($request){ 
-        //         if (!empty($request->print_sr_no)) {
-        //         $query->where('print_sr_no', 'like','%'.$request->print_sr_no.'%'); 
-        //         }
-        //         if (!empty($request->name)) {
-        //         $query->where('name_e', 'like','%'.$request->name.'%'); 
-        //         }
-        //         if (!empty($request->father_name)) {
-        //         $query->where('father_name_e', 'like','%'.$request->father_name.'%'); 
-        //         } 
-        //        }) 
-        //        ->get(); 
-        $response= array();                       
-        $response['status']= 1;                       
-        $response['data']=view('admin.auth.result',compact('voters'))->render();
-        return $response;
-       
-    }
     public function showLoginForm(){
         return view('admin.auth.login');
     }
+    
     public function login(Request $request){ 
      
           $this->validate($request, [
@@ -134,56 +66,28 @@ class LoginController extends Controller
               'captcha' => 'required|captcha' 
           ]);
           $admins=Admin::where('email',$request->email)->first();
-          if (!empty($admins)) { 
-            if ($admins->status==2) {
-            return redirect()->route('student.resitration.verification',Crypt::encrypt($admins->id)); 
-            }
-          }
+
           $credentials = [
                      'email' => $request['email'],
                      'password' => $request['password'],
                      'status' => 1,
                  ]; 
             if(auth()->guard('admin')->attempt($credentials)) {
-                if (Auth::guard('admin')->user()->user_type==1) {
-                    return redirect()->route('admin.dashboard');
-                }else{
-                    return redirect()->route('admin.dashboard');
-                }
-                   
+                return redirect()->route('admin.dashboard');
             } 
 
-            // $student = Student::orWhere('username',$request->email)->first();
-            //  if (!empty($student)) {
-            //      if (Hash::check($request->password, $student->password)) {
-            //          auth()->guard('student')->loginUsingId($student->id);
-            //          return redirect()->route('student.dashboard');
-
-            //      } else {
-            //          return Redirect()->back()->with(['message'=>'Invalid User or Password','class'=>'error']);
-            //      }
-            //  }
-            
-            // if (auth()->guard('student')->attempt($credentials)) {
-            //   return redirect()->route('student.dashboard');
-            // }
             return Redirect()->back()->with(['message'=>'Invalid User or Password','class'=>'error']); 
         
        
     }
-     public function refreshCaptcha()
+
+    public function refreshCaptcha()
     {  
         return  captcha_img('math');
     }
-    // protected function credentials(Request $request)
-    // {
-    //     // return $request->only($this->username(), 'password');
-    //     return ['email'=>$request->{$this->username()},'password'=>$request->password,'status'=>'1'];
-    // }
-  
+    
 
-    // Logout method with guard logout for admin only
- public function logout()
+    public function logout()
     {
         $this->guard()->logout();
         return redirect()->route('admin.login');

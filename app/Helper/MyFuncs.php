@@ -21,8 +21,36 @@ use DatePeriod;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Route;
+use Illuminate\Support\Facades\DB;
 
 class MyFuncs {
+
+   // hot menu 
+  public static function hotMenu(){ 
+    $userid = Auth::guard('admin')->user()->id;
+    $hotMenus = DB::select(DB::raw("Select `sm`.`name`, `sm`.`url` From `default_role_quick_menu` `drqm` inner join `sub_menus` `sm` on `sm`.`id` = `drqm`.`sub_menu_id` where `drqm`.`role_id` = (select `role_id` from `admins` where `id` = $userid ) and `drqm`.`status` = 1 order by `sm`.`sorting_id` limit 5;"));
+    return $hotMenus;
+    
+  } 
+  
+  public static function userHasMinu(){ 
+    $userid = Auth::guard('admin')->user()->id;
+    $hotMenus = DB::select(DB::raw("Select distinct `mt`.`id`, `mt`.`name`, `mt`.`icon` From `default_role_menu` `drm` inner join `sub_menus` `sm` on `sm`.`id` = `drm`.`sub_menu_id` inner join `minu_types` `mt` on `mt`.`id` = `sm`.`menu_type_id` where `drm`.`role_id` = (select `role_id` from `admins` where `id` = $userid ) and `drm`.`status` = 1 order by `mt`.`sorting_id`;"));
+    return $hotMenus;           
+
+  }
+
+   // main menu 
+  public static function mainMenu($menu_type_id){ 
+    $userid = Auth::guard('admin')->user()->id;
+    $hotMenus = DB::select(DB::raw("Select `sm`.`name`, `sm`.`url` From `default_role_menu` `drm` inner join `sub_menus` `sm` on `sm`.`id` = `drm`.`sub_menu_id` where `drm`.`role_id` = (select `role_id` from `admins` where `id` = $userid ) and `drm`.`status` = 1 and `sm`.`menu_type_id` = $menu_type_id order by `sm`.`sorting_id`;"));
+    return $hotMenus;
+    
+  }
+
+
+  //last line ------------------------
+  
 
     public static function full_name($first_name,$last_name) {
         // return $first_name . ', '. $last_name;   
@@ -39,71 +67,8 @@ class MyFuncs {
     public static function getUserId(){
        return $user = Auth::guard('admin')->user()->id;  
     } 
-    public static function getStudentClasses(){
-
-        $user = MyFuncs::getUser();    
-        $userClass = UserClassType::where('admin_id',$user->id)->distinct()->get(['class_id']);
-        return $classes = array_pluck(ClassType::get(['id','name'])->toArray(),'name', 'id');
-    }
-    public static function getClasses(){
-
-        $user = MyFuncs::getUser();    
-        $userClass = UserClassType::where('admin_id',$user->id)->distinct()->get(['class_id']);
-        return $classes = array_pluck(ClassType::whereIn('id',$userClass)->get(['id','name'])->toArray(),'name', 'id');
-    }
-
-    public static function getClassByHasUser(){
-        $user = MyFuncs::getUser();
-        $userClass = UserClassType::where('admin_id',$user->id)->distinct()->get(['class_id']);
-        return $classes = ClassType::whereIn('id',$userClass)->get();
-    }
-
-    public static function getAllClasses(){ 
-        return $classes = array_pluck(ClassType::get(['id','name'])->toArray(),'name', 'id');
-    }
-
-    public static function getSections($class_id){
-        $user = MyFuncs::getUser();
-        $userClass = UserClassType::where('admin_id',$user->id)->distinct()->get(['class_id']);
-        $userSections = UserClassType::where('admin_id',$user->id)->where('class_id',$class_id)->get(['section_id']);  
-       return SectionType::whereIn('id',$userSections)->get();
-       
-    }
-    public static function getSectionsClaasArrayId($class_id){
-        $user = MyFuncs::getUser();
-        $userClass = UserClassType::where('admin_id',$user->id)->distinct()->get(['class_id']);
-        $userSections = UserClassType::where('admin_id',$user->id)->whereIn('class_id',$class_id)->get(['section_id']);  
-       return SectionType::whereIn('id',$userSections)->get();
-       
-    }
-    public static function getStudentSections($class_id){
-        $user = MyFuncs::getUser();
-        $userClass = UserClassType::where('admin_id',$user->id)->distinct()->get(['class_id']);
-        $userSections = UserClassType::where('admin_id',$user->id)->where('class_id',$class_id)->get(['section_id']);  
-       return SectionType::all();
-       
-    }
-
-
-   // hot menu 
-  public static function hotMenu(){ 
-      $hotMenus = HotMenu::where('status',1)->where('admin_id',Auth::guard('admin')->user()->id)
-      ->get(['sub_menu_id']); 
-       return $subMenus = SubMenu::whereIn('id',$hotMenus)->take('7') 
-                          ->get(); 
     
-  } 
-   // main menu 
-  public static function mainMenu($menu_type_id){ 
-      $mainMenus = Minu::where('admin_id',Auth::guard('admin')->user()->id)
-                          ->where('minu_id',$menu_type_id)
-                          ->where('status',1)
-                          ->get(['sub_menu_id']); 
-        
-       return $subMenus = SubMenu::whereIn('id',$mainMenus)->orderBy('sorting_id','ASC')
-                          ->get(); 
-    
-  }
+  
      // read write delete permission check
   public static function menuPermission(){ 
     $user_id =Auth::guard('admin')->user()->id;
@@ -136,12 +101,7 @@ class MyFuncs {
 
    }
 // read write delete permission check
-  public static function userHasMinu(){ 
-    return array_pluck(Minu::where('admin_id',Auth::guard('admin')->user()->id)->where('status',1)->distinct()->get(['minu_id'])->toArray(), 'minu_id');
-               
-
-  } 
-
+  
   public static function showMenu(){
     $menu='';
     $subMenus=array();

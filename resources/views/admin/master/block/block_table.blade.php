@@ -1,22 +1,20 @@
 <table id="block_datatable" class="table table-striped table-hover">
     <thead>
         <tr>
-            
+            <th>States</th>
             <th>District</th>
             <th>Code</th>
             <th>Name (English)</th>
             <th>Name (Local Language)</th>
-             
             <th>Action</th>
-             
         </tr>
     </thead>
     <tbody>
        @foreach ($BlocksMcs as $BlockMc)
         
         <tr>
-             
-            <td>{{ $BlockMc->district->name_e or '' }}</td>
+            <td>{{ $BlockMc->state_name}}</td> 
+            <td>{{ $BlockMc->disrict_name}}</td>
             <td>{{ $BlockMc->code }}</td>
             <td>{{ $BlockMc->name_e }}</td>
             <td>{{ $BlockMc->name_l }}</td>

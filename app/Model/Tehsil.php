@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tahsil extends Model
+class Tehsil extends Model
 {
 	
    protected $fillable=[
