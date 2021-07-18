@@ -17,5 +17,4 @@ yarn-error.log
 *.zip
 /demo
 /loksabha
-/policy
-/storage
+/policy 
