@@ -28,14 +28,14 @@ class MyFuncs {
    // hot menu 
   public static function hotMenu(){ 
     $userid = Auth::guard('admin')->user()->id;
-    $hotMenus = DB::select(DB::raw("Select `sm`.`name`, `sm`.`url` From `default_role_quick_menu` `drqm` inner join `sub_menus` `sm` on `sm`.`id` = `drqm`.`sub_menu_id` where `drqm`.`role_id` = (select `role_id` from `admins` where `id` = $userid ) and `drqm`.`status` = 1 order by `sm`.`sorting_id` limit 5;"));
+    $hotMenus = DB::select(DB::raw("Select `sm`.`name`, `sm`.`url`, `sm`.`sorting_id` From `default_role_quick_menu` `drqm` inner join `sub_menus` `sm` on `sm`.`id` = `drqm`.`sub_menu_id` where `drqm`.`role_id` = (select `role_id` from `admins` where `id` = $userid ) and `drqm`.`status` = 1 order by `sm`.`sorting_id` limit 5;"));
     return $hotMenus;
     
   } 
   
   public static function userHasMinu(){ 
     $userid = Auth::guard('admin')->user()->id;
-    $hotMenus = DB::select(DB::raw("Select distinct `mt`.`id`, `mt`.`name`, `mt`.`icon` From `default_role_menu` `drm` inner join `sub_menus` `sm` on `sm`.`id` = `drm`.`sub_menu_id` inner join `minu_types` `mt` on `mt`.`id` = `sm`.`menu_type_id` where `drm`.`role_id` = (select `role_id` from `admins` where `id` = $userid ) and `drm`.`status` = 1 order by `mt`.`sorting_id`;"));
+    $hotMenus = DB::select(DB::raw("Select distinct `mt`.`id`, `mt`.`name`, `mt`.`icon`, `mt`.`sorting_id` From `default_role_menu` `drm` inner join `sub_menus` `sm` on `sm`.`id` = `drm`.`sub_menu_id` inner join `minu_types` `mt` on `mt`.`id` = `sm`.`menu_type_id` where `drm`.`role_id` = (select `role_id` from `admins` where `id` = $userid ) and `drm`.`status` = 1 order by `mt`.`sorting_id`;"));
     return $hotMenus;           
 
   }
@@ -43,14 +43,14 @@ class MyFuncs {
    // main menu 
   public static function mainMenu($menu_type_id){ 
     $userid = Auth::guard('admin')->user()->id;
-    $hotMenus = DB::select(DB::raw("Select `sm`.`name`, `sm`.`url` From `default_role_menu` `drm` inner join `sub_menus` `sm` on `sm`.`id` = `drm`.`sub_menu_id` where `drm`.`role_id` = (select `role_id` from `admins` where `id` = $userid ) and `drm`.`status` = 1 and `sm`.`menu_type_id` = $menu_type_id order by `sm`.`sorting_id`;"));
+    $hotMenus = DB::select(DB::raw("Select `sm`.`name`, `sm`.`url`, `sm`.`sorting_id` From `default_role_menu` `drm` inner join `sub_menus` `sm` on `sm`.`id` = `drm`.`sub_menu_id` where `drm`.`role_id` = (select `role_id` from `admins` where `id` = $userid ) and `drm`.`status` = 1 and `sm`.`menu_type_id` = $menu_type_id order by `sm`.`sorting_id`;"));
     return $hotMenus;
     
   }
 
 
   //last line ------------------------
-  
+
 
     public static function full_name($first_name,$last_name) {
         // return $first_name . ', '. $last_name;   
