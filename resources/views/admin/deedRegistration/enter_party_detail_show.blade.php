@@ -23,15 +23,17 @@
 </div>
 <div class="card" style="margin-top: 30px">
   <div class="card-header">
-    <h3 class="card-title">Second Party Detail</h3>
+    <h3 class="card-title"><b>Second Party Detail</b></h3>
   </div>
   <table id="block_datatable" class="table table-striped table-hover table-bordered">
     <thead>
         <tr>  
             <th>Name</th>
+            <th>Name (H)</th>
             <th>Relation</th>
             <th>Relation Name (E)</th> 
             <th>Relation Name (H)</th> 
+            <th>Family Id</th> 
             <th></th> 
         </tr>
     </thead>
@@ -39,6 +41,7 @@
       @foreach ($second_party as $RegPartyDetail)
         <tr>
           <td>{{$RegPartyDetail->name_e}} - {{$RegPartyDetail->name_l}}</td>
+          <td><input type="text" name="name_l" class="form-control" id="name_l" value="{{$RegPartyDetail->name_l}}"></td>
           <td>
             <select class="form-control" name="relation" id="relation">
               @foreach ($relations as $relation)
@@ -51,7 +54,10 @@
             <input type="text" name="fname_l" class="form-control" id="fname_l" value="{{$RegPartyDetail->fname_l}}">
           </td>
           <td>
-            <a href="#" class="btn btn-info" success-popup="true" button-click="btn_show" onclick="callAjax(this,'{{ route('admin.deed.registration.enter.party.detail.save',$RegPartyDetail->id) }}'+'?fname_l='+$('#fname_l').val()+'&relation='+$('#relation').val())">Save</a>
+            <input type="text" name="family_id" class="form-control" id="family_id" value="{{$RegPartyDetail->ppp_family_id}}">
+          </td>
+          <td>
+            <a href="#" class="btn btn-info" success-popup="true" button-click="btn_show" onclick="callAjax(this,'{{ route('admin.deed.registration.enter.party.detail.save',$RegPartyDetail->id) }}'+'?fname_l='+$('#fname_l').val()+'&relation='+$('#relation').val()+'&name_l='+$('#name_l').val()+'&family_id='+$('#family_id').val())">Save</a>
           </td>
         </tr>
       @endforeach 
@@ -60,7 +66,7 @@
 </div> 
 <div class="card" style="margin-top: 30px">
   <div class="card-header">
-    <h3 class="card-title">Witness Detail</h3>
+    <h3 class="card-title"><b>Witness Detail</b></h3>
   </div>
   <table id="block_datatable" class="table table-striped table-hover table-bordered">
     <thead>

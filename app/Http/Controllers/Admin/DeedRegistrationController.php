@@ -134,6 +134,7 @@ class DeedRegistrationController extends Controller
   
   public function enterPartyDetailSave(Request $request,$id)
   {
+    // dd($request);
     $rules=[ 
           'relation' => 'required', 
     ]; 
@@ -147,6 +148,8 @@ class DeedRegistrationController extends Controller
     }
     $datas=RegPartyDetail::find($id);
     $datas->fname_l=$request->fname_l;
+    $datas->name_l=$request->name_l;
+    $datas->ppp_family_id=$request->family_id;
     $datas->relation_id=$request->relation;
     $datas->save();
     $response=['status'=>1,'msg'=>'Save Successfully'];
@@ -252,7 +255,7 @@ class DeedRegistrationController extends Controller
     $documentUrl = Storage_path() . '/app/deedFinalize/'.date('dmY').'/'.$admin->id;   
     @mkdir($documentUrl, 0755, true);  
     $mpdf->Output($documentUrl.'/'.$c_property_id.'.pdf', 'F');
-
+    
     $file_path = '/deedFinalize/'.date('dmY').'/'.$admin->id.'/'.$c_property_id.'.pdf';
     $reg_date = date('Y-m-d');
     $result = DB::select(DB::raw("call `up_deed_finalize`($admin->id, $deed_id, '$file_path', '$reg_date');"));

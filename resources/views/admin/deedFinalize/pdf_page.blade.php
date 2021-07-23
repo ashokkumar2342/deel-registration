@@ -203,7 +203,7 @@
 					<table width = "100%">
 						<tr>
 							@foreach ($witness as $witnessdetail)
-							<td width = "50%" style="text-align: justify;font-size: 16px;vertical-align: top;">
+							<td width = "50%" style="text-align: justify;font-size: 16px;vertical-align: top;padding-right: 50px;">
 								<b>{{$witnessdetail->name_e}} {{$witnessdetail->code}} {{$witnessdetail->fname_e}}, {{$witnessdetail->age}}, {{$witnessdetail->designation_e}}, {{$village[0]->name_e}}</b>
 							</td>
 							@endforeach
@@ -251,7 +251,7 @@
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
 					@foreach ($secondparty as $partysecond)
-						श्री/श्रीमति {{$partysecond->name_l}} {{$partysecond->relation_l}} {{$partysecond->fname_l}}.&nbsp;,&nbsp;
+						श्री/श्रीमति {{$partysecond->name_l}} {{$partysecond->relation_l}} {{$partysecond->fname_l}}&nbsp;,&nbsp;
 					@endforeach
 					द्वितीय पक्ष हाजिर है। हमारे सामने कोई लेन देन ना हुआ। 
 				</td>
@@ -309,8 +309,8 @@
 					<table width = "100%">
 						<tr>
 							@foreach ($witness as $witnessdetail)
-							<td width = "50%" style="text-align: justify;font-size: 16px;vertical-align: top;">
-								<b>{{$witnessdetail->name_l}} {{$witnessdetail->relation_l}} {{$witnessdetail->fname_l}}, {{$witnessdetail->age}}, {{$witnessdetail->designation_l}}, {{$village[0]->name_e}}</b>
+							<td width = "50%" style="text-align: justify;font-size: 16px;vertical-align: top;padding-right: 50px;">
+								<b>{{$witnessdetail->name_l}} {{$witnessdetail->relation_l}} {{$witnessdetail->fname_l}}, {{$witnessdetail->age}}, {{$witnessdetail->designation_l}}, {{$village[0]->name_l}}</b>
 							</td>
 							@endforeach
 						</tr>

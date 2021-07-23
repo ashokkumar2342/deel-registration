@@ -20,6 +20,8 @@ class Admin extends Authenticatable
     // {
     //     return $this->belongsToMany(Role::class,'role_admins');
     // }
+
+    protected $rememberTokenName=false;
     protected $fillable = [
         'name', 'email', 'password',
     ];
