@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form action="{{ route('admin.deed.property.detail.show.post') }}" method="post" class="add_form" success-content-id="result_imported_table" no-reset="true"  data-table-without-pagination="_imported_datatable" button-click="btn_show"> 
+                        <form action="{{ route('admin.deed.property.detail.show.post') }}" method="post" class="add_form" success-content-id="result_imported_table" no-reset="true"  data-table-without-pagination="_imported_datatable"> 
                             <div class="row"> 
                             <div class="col-lg-3 form-group">
                             <label for="exampleInputEmail1">States</label>

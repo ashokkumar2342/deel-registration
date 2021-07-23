@@ -16,7 +16,7 @@
      <td>{{$data->omobile}}</td>
      <td> 
         @if ($data->status==0)
-        <button class="btn btn-danger btn-xs" success-popup="true" button-click="parent_info_tab" title="Delete" onclick="if (confirm('Are you Sure delete')){callAjax(this,'{{ route('admin.deed.property.detail.delete',Crypt::encrypt($data->id)) }}') } else{console_Log('cancel') }"  >Delete</button>
+        <button class="btn btn-danger btn-xs" success-popup="true" button-click="btn_show" title="Delete" onclick="if (confirm('Are you Sure delete')){callAjax(this,'{{ route('admin.deed.property.detail.delete',Crypt::encrypt($data->id)) }}') } else{console_Log('cancel') }"  >Delete</button>
         @endif 
      </td> 
          
