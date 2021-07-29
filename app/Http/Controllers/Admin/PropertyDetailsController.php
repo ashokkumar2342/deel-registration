@@ -112,8 +112,10 @@ class PropertyDetailsController extends Controller
         	foreach ($results as $values) {
         		// dd($values);
         		foreach ($values as $key => $value) {
-        			
-        			$SaveDatas= DB::select(DB::raw("call up_upload_property_excel ('$admin->id','$request->states','$request->district','$request->block','$request->village','$value->sno','$value->propertyid','$value->ownername','$value->ownernamehindi','$value->fathername','$value->owneraadhaar','$value->ownermobile','$value->totalarea','$value->builtuparea','$value->openarea','$value->pppfamilyid','$value->pppmemberid','$value->propertytype')"));   
+        			if(trim($value->propertyid)!=''){
+                $SaveDatas= DB::select(DB::raw("call up_upload_property_excel ('$admin->id','$request->states','$request->district','$request->block','$request->village','$value->sno','$value->propertyid','$value->ownername','$value->ownernamehindi','$value->fathername','$value->owneraadhaar','$value->ownermobile','$value->totalarea','$value->builtuparea','$value->openarea','$value->pppfamilyid','$value->pppmemberid','$value->propertytype','$value->fh_name_hindi')"));     
+              }
+        		  
         		}
         	}
         	$tmp_upload_propertys=TmpUploadProperty::all();

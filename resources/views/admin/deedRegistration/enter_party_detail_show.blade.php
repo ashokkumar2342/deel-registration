@@ -41,9 +41,9 @@
       @foreach ($second_party as $RegPartyDetail)
         <tr>
           <td>{{$RegPartyDetail->name_e}} - {{$RegPartyDetail->name_l}}</td>
-          <td><input type="text" name="name_l" class="form-control" id="name_l" value="{{$RegPartyDetail->name_l}}"></td>
+          <td><input type="text" name="name_l" class="form-control" id="name_l_{{$RegPartyDetail->id}}" value="{{$RegPartyDetail->name_l}}"></td>
           <td>
-            <select class="form-control" name="relation" id="relation">
+            <select class="form-control" name="relation" id="relation_{{$RegPartyDetail->id}}">
               @foreach ($relations as $relation)
                 <option value="{{$relation->id}}" {{$relation->id==$RegPartyDetail->relation_id?'selected':''}}>{{$relation->relation_e}}</option>
               @endforeach
@@ -51,13 +51,13 @@
           </td>
           <td>{{$RegPartyDetail->fname_e}}</td>
           <td>
-            <input type="text" name="fname_l" class="form-control" id="fname_l" value="{{$RegPartyDetail->fname_l}}">
+            <input type="text" name="fname_l" class="form-control" id="fname_l_{{$RegPartyDetail->id}}" value="{{$RegPartyDetail->fname_l}}">
           </td>
           <td>
-            <input type="text" name="family_id" class="form-control" id="family_id" value="{{$RegPartyDetail->ppp_family_id}}">
+            <input type="text" name="family_id" class="form-control" id="family_id_{{$RegPartyDetail->id}}" value="{{$RegPartyDetail->ppp_family_id}}">
           </td>
           <td>
-            <a href="#" class="btn btn-info" success-popup="true" button-click="btn_show" onclick="callAjax(this,'{{ route('admin.deed.registration.enter.party.detail.save',$RegPartyDetail->id) }}'+'?fname_l='+$('#fname_l').val()+'&relation='+$('#relation').val()+'&name_l='+$('#name_l').val()+'&family_id='+$('#family_id').val())">Save</a>
+            <a href="#" class="btn btn-info" success-popup="true" button-click="btn_show" onclick="callAjax(this,'{{ route('admin.deed.registration.enter.party.detail.save',$RegPartyDetail->id) }}'+'?fname_l='+$('#fname_l_{{$RegPartyDetail->id}}').val()+'&relation='+$('#relation_{{$RegPartyDetail->id}}').val()+'&name_l='+$('#name_l_{{$RegPartyDetail->id}}').val()+'&family_id='+$('#family_id_{{$RegPartyDetail->id}}').val())">Save</a>
           </td>
         </tr>
       @endforeach 

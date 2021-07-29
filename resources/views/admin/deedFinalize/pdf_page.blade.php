@@ -22,6 +22,7 @@
 								
 								<td><img src="{{ $image }}" alt="" width="150px" height="120px" style="border: 2px solid black;"> &nbsp;&nbsp;</td>		
 							@endforeach
+
 						</tr>
 						<tr>
 							@foreach ($RegPhotoDetails as $RegPhotoDetail)
@@ -56,7 +57,7 @@
 					@foreach ($fisrtparty as $partyfirst)
 						<b>{{$partyfirst->name_e}} {{$partyfirst->designation_e}}</b>,&nbsp; 
 					@endforeach
-					Village <b>{{$village[0]->name_e}}</b> Tehsil <b>{{$tehsil[0]->name_e}}</b>, District <b>{{$district[0]->name_e}}</b> (hereinafter called the “First party”) acting vide Resolution no <b>{{$resolution[0]->resolution_no}}</b> Dated <b>{{$resolution[0]->reg_date}}</b>(copy of same attached herewith)	
+					Village <b>{{$village[0]->name_e}}</b> Tehsil <b>{{$tehsil[0]->name_e}}</b>, District <b>{{$district[0]->name_e}}</b> (hereinafter called the “First party”) acting vide Resolution no <b>{{$resolution[0]->resolution_no}}</b> Dated <b>{{$resolution_date}}</b>(copy of same attached herewith)	
 				</td>
 			</tr>
 			<tr>
@@ -74,12 +75,12 @@
 			</tr>
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
-					That the First Party is duly authorized vide resolution Resolution no <b>{{$resolution[0]->resolution_no}}</b> Dated <b>{{$resolution[0]->reg_date}}</b> to execute this deed of Title / Ownership and Certified that Land/Plot belongs to the second party as detailed here as under:
+					That the First Party is duly authorized vide resolution Resolution no <b>{{$resolution[0]->resolution_no}}</b> Dated <b>{{$resolution_date}}</b> to execute this deed of Title / Ownership and Certified that Land/Plot belongs to the second party as detailed here as under:
 				</td>
 			</tr>
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
-					Whereas the land hereinafter described below is owned and already possessed by the Second Party in full proprietary rights.
+					Whereas the land hereinafter described below is owned and already possessed by the Second Party in full property rights.
 				</td>
 			</tr>
 			<tr>
@@ -146,7 +147,7 @@
 						<tr>
 							<td style="vertical-align: top;">6.</td>
 							<td style="text-align: justify;font-size: 16px">
-								All the disputes and the differences arising out or any way touching or concerning this deed whatsoever shall be referred to the Deputy Commissioner <b>{{$district[0]->name_e}}</b> or any other officer appointed by him. There will beno objection to appointment of arbitrator and the arbitrator so appointed shall be Government Servant or an Officer appointed by competent authority and he will be competent to deal  with matter to which this deal relates and in discharge of his duties as Government Servant or Officer as may be the views expressed by him all or any of the matters in dispute or in case of differences the objection to such appointment that the arbitrator so appointed as  Government Servant or an Officer of the Authority that he had to deal with the matter to which this deed relates and that in the course of his duties as such Government Servants or Officer as the case may be he has expressed his views on all or any of  the matters in dispute or in differences  the decision of such arbitrator shall be final and bindingon the parties of this deed. If and so long as the second party shall fully performed and comply with and shall continue to so perform and comply with each and all the terms and conditions herein made and provided.
+								All the disputes and the differences arising out or any way touching or concerning this deed whatsoever shall be referred to the Deputy Commissioner <b>{{$district[0]->name_e}}</b> or any other officer appointed by him. There will be no objection to appointment of arbitrator and the arbitrator so appointed shall be Government Servant or an Officer appointed by competent authority and he will be competent to deal  with matter to which this deal relates and in discharge of his duties as Government Servant or Officer as may be the views expressed by him all or any of the matters in dispute or in case of differences the objection to such appointment that the arbitrator so appointed as  Government Servant or an Officer of the Authority that he had to deal with the matter to which this deed relates and that in the course of his duties as such Government Servants or Officer as the case may be he has expressed his views on all or any of  the matters in dispute or in differences  the decision of such arbitrator shall be final and binding on the parties of this deed. If and so long as the second party shall fully performed and comply with and shall continue to so perform and comply with each and all the terms and conditions herein made and provided.
 							</td>
 						</tr>
 						<tr>
@@ -167,7 +168,7 @@
 
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
-					Signed by the Parties at <b>{{$tehsil[0]->name_e}}</b> on the <b>{{date('d')}} day of {{date('M - Y')}}</b>. First Party (acting under Resolution no <b>{{$resolution[0]->resolution_no}}</b> Dated <b>{{$resolution[0]->reg_date}}</b> on behalf of state Govt. of Haryana)
+					Signed by the Parties at <b>{{$tehsil[0]->name_e}}</b> on the <b>{{date('d')}} day of {{date('M - Y')}}</b>. First Party (acting under Resolution no <b>{{$resolution[0]->resolution_no}}</b> Dated <b>{{$resolution_date}}</b> on behalf of state Govt. of Haryana)
 				</td>
 			</tr>
 			<tr>
@@ -187,20 +188,23 @@
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
 					@foreach ($secondparty as $partysecond)
-						<b>{{$partysecond->name_e}} Aadhar No.({{$partysecond->aadhar}}) {{$partysecond->code}} {{$partysecond->fname_e}}</b>,&nbsp;Village <b>{{$village[0]->name_e}}</b> Tehsil <b>{{$tehsil[0]->name_e}}</b>, District <b>{{$district[0]->name_e}}</b><br><br>&nbsp; 
+						<b>{{$partysecond->name_e}} Aadhar No.({{$partysecond->aadhar}}) {{$partysecond->code}} {{$partysecond->fname_e}}</b>,&nbsp; 
 					@endforeach
-					
+					Village <b>{{$village[0]->name_e}}</b> Tehsil <b>{{$tehsil[0]->name_e}}</b>, District <b>{{$district[0]->name_e}}</b><br><br>&nbsp;
 				</td>
 			</tr>
 			
 			<tr>
-				<td style="text-align: justify;font-size: 16px">
-					<b>Witnesses:-</b><br>&nbsp;
-				</td>
-			</tr>
-			<tr>
 				<td style="text-align: justify;">
 					<table width = "100%">
+						<tr>
+							<td style="text-align: justify;font-size: 16px">
+								<b>Witnesses:-	&nbsp;&nbsp;&nbsp;&nbsp;(Witness 1)</b><br>&nbsp;
+							</td>
+							<td style="text-align: justify;font-size: 16px">
+								<b>(Witness 2)</b><br>&nbsp;
+							</td>
+						</tr>
 						<tr>
 							@foreach ($witness as $witnessdetail)
 							<td width = "50%" style="text-align: justify;font-size: 16px;vertical-align: top;padding-right: 50px;">
@@ -220,13 +224,13 @@
 		<tbody>
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
-					आज दिनांक {{date('d-m-Y')}} दिन	{{date('h-i')}} बजे
+					आज दिनांक {{date('d-m-Y')}} दिन	{{$rday_hindi}} समय {{date('h-i')}} बजे
 				</td>
 			</tr>
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
 					@foreach ($fisrtparty as $partysecond)
-						श्री/श्रीमति {{$partysecond->name_l}} ग्राम पंचायत {{$village[0]->panchayat_l}},&nbsp; 
+						श्री/श्रीमति {{$partysecond->name_l}} ग्राम सचिव {{$village[0]->panchayat_l}},&nbsp; 
 					@endforeach
 					ने प्रलेरव/टाईटल डीड रजिस्ट्ररी कराने के लिए कार्यालय सब रजिस्ट्रार {{$tehsil[0]->name_l}} में प्रस्तुत किया। 
 				</td>
@@ -239,7 +243,7 @@
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
 					@foreach ($fisrtparty as $partysecond)
-						श्री/श्रीमति {{$partysecond->name_l}} ग्राम पंचायत {{$village[0]->panchayat_l}}<br> 
+						श्री/श्रीमति {{$partysecond->name_l}} ग्राम सचिव {{$village[0]->panchayat_l}}<br> 
 					@endforeach
 				</td>
 			</tr>
@@ -272,7 +276,7 @@
 			</tr>
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
-					पहले साक्षी को हम जानते है और पहला साक्षी दूसरे साक्षी को पहचानता है। अतः शिनाखत से संतुष्ट है।
+					पहले साक्षी को हम जानते है और पहला साक्षी दूसरे साक्षी को पहचानता है। अतः शिनाखत से संतुष्ट है।<br><br>&nbsp;
 				</td>
 			</tr>
 			<tr>
@@ -280,33 +284,48 @@
 					संयुक्त/सब रजिस्ट्रार,<br>{{$tehsil[0]->name_l}}
 				</td>
 			</tr>
-			<tr>
-				<td style="text-align: justify;font-size: 16px">
-					@foreach ($fisrtparty as $partysecond)
-						श्री/श्रीमति {{$partysecond->name_l}} ग्राम पंचायत {{$village[0]->panchayat_l}} 
-					@endforeach 
-					प्रथमपक्ष
-				</td>
-			</tr>
-
-			<tr>
-				<td style="text-align: justify;font-size: 16px">
-					हस्ताक्षर द्वितीय पक्ष
-					@foreach ($secondparty as $partysecond)
-						श्री/श्रीमति {{$partysecond->name_l}} {{$partysecond->relation_l}} {{$partysecond->fname_l}},&nbsp; 
-					@endforeach 
-					प्रथमपक्ष
-				</td>
-			</tr>
 			
-			<tr>
-				<td style="text-align: justify;font-size: 16px">
-					साक्षी:-<br>&nbsp;
-				</td>
-			</tr>
+
 			<tr>
 				<td style="text-align: justify;">
 					<table width = "100%">
+						<tr>
+							<td style="text-align: justify;font-size: 16px">
+								हस्ताक्षर प्रथम पक्ष<br><br><br>&nbsp;
+							</td>
+							<td style="text-align: justify;font-size: 16px">
+								हस्ताक्षर द्वितीय पक्ष<br><br><br>&nbsp;
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: justify;font-size: 16px;vertical-align: top;">
+								@foreach ($fisrtparty as $partysecond)
+									श्री/श्रीमति {{$partysecond->name_l}} ग्राम सचिव {{$village[0]->panchayat_l}} 
+								@endforeach 
+								<br><br>&nbsp;
+							</td>
+							<td style="text-align: justify;font-size: 16px;vertical-align: top;">
+								@foreach ($secondparty as $partysecond)
+									श्री/श्रीमति {{$partysecond->name_l}} {{$partysecond->relation_l}} {{$partysecond->fname_l}},<br> 
+								@endforeach 
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+
+			<tr>
+				<td style="text-align: justify;">
+					<table width = "100%">
+						<tr>
+							<td style="text-align: justify;font-size: 16px">
+								साक्षी:-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(साक्षी 1)<br>&nbsp;
+							</td>
+							<td style="text-align: justify;font-size: 16px">
+								(साक्षी 2)<br>&nbsp;
+							</td>
+						</tr>
 						<tr>
 							@foreach ($witness as $witnessdetail)
 							<td width = "50%" style="text-align: justify;font-size: 16px;vertical-align: top;padding-right: 50px;">
@@ -320,7 +339,7 @@
 
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
-					प्रमाणित किया जाता है कि पक्षों व साक्षीगण के हस्ताक्षर व निशान अगूंठा हमारे सामने इबारत जोहरी पर लिए गये।<br>दिनांक:-
+					प्रमाणित किया जाता है कि पक्षों व साक्षीगण के हस्ताक्षर व निशान अगूंठा हमारे सामने इबारत जोहरी पर लिए गये।<br>दिनांक:-<br><br>&nbsp;
 				</td>
 			</tr>
 			<tr>
@@ -331,7 +350,7 @@
 			
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
-					वसीका हजा ............ बही नं0 ............ जिल्द नं0 ............ के सफा नं0 ........... तिथि .............	को दर्ज किया गया और नकल जायद बही नं	......... जिल्द नं0 ..........के सफा नं0 .............पर चस्पा की गई। 
+					वसीका हजा ................ बही नं0 ............ जिल्द नं0 ............ के सफा नं0 ........... तिथि .........................	को दर्ज किया <br><br>गया और नकल जायद बही नं	......... जिल्द नं0 ..........के सफा नं0 .............पर चस्पा की गई। <br><br>&nbsp;
 				</td>
 			</tr>
 			

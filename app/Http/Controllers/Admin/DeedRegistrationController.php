@@ -225,6 +225,8 @@ class DeedRegistrationController extends Controller
     $RegPhotoDetails=DB::select(DB::raw("select * from `reg_photo_detail` where `deed_detail_id` = $deed_id order by `party_type`;"));
     
 
+    $resolution_date = date_format(date_create($resolution[0]->reg_date),'d-m-Y');
+
     $path=Storage_path('fonts/');
     $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
     $fontDirs = $defaultConfig['fontDir']; 
@@ -247,8 +249,24 @@ class DeedRegistrationController extends Controller
         'nbpgSuffix' => ' पृष्ठों का पृष्ठ'
     ]);
 
-
-    $html = view('admin.deedFinalize.pdf_page',compact('c_property_id', 'RegPhotoDetails', 'village', 'tehsil', 'district', 'resolution', 'fisrtparty', 'secondparty', 'witness', 'propertyDetail', 'block')); 
+    $rday = date('N');
+    $rday_hindi = '';
+    if($rday == 1){
+      $rday_hindi = 'सोमवार';
+    }elseif($rday == 2){
+      $rday_hindi = 'मंगलवार';
+    }elseif($rday == 3){
+      $rday_hindi = 'बुधवार';
+    }elseif($rday == 4){
+      $rday_hindi = 'वीरवार';
+    }elseif($rday == 5){
+      $rday_hindi = 'शुक्रवार';
+    }elseif($rday == 6){
+      $rday_hindi = 'शनिवार';
+    }elseif($rday == 7){
+      $rday_hindi = 'रविवार';
+    }
+    $html = view('admin.deedFinalize.pdf_page',compact('c_property_id', 'RegPhotoDetails', 'village', 'tehsil', 'district', 'resolution', 'fisrtparty', 'secondparty', 'witness', 'propertyDetail', 'block', 'rday_hindi', 'resolution_date')); 
     $mpdf->WriteHTML($html);
 
 
