@@ -13,33 +13,45 @@
 		<tbody>
 			<tr>
 				<td>
-					<table style="padding-left: 90px">
+					<table>
 						<tr>
-							@foreach ($RegPhotoDetails as $RegPhotoDetail)
-								@php	
-								$image  =\Storage_path('app/'.$RegPhotoDetail->photo_path);
-								@endphp
-								
-								<td><img src="{{ $image }}" alt="" width="150px" height="120px" style="border: 2px solid black;"> &nbsp;&nbsp;</td>		
-							@endforeach
+							@php	
+								$image  =\Storage_path('app/image/blank.png');
+							@endphp
+							<td><img src="{{ $image }}" alt="" width="100px" height="140px" style="border: 0px solid black;"> &nbsp;&nbsp;</td>
+							<td>
+								<table style="padding-left: 0px">
+									<tr>
+										
+										@foreach ($RegPhotoDetails as $RegPhotoDetail)
+											@php	
+											$image  =\Storage_path('app/'.$RegPhotoDetail->photo_path);
+											@endphp
+											
+											<td><img src="{{ $image }}" alt="" width="150px" height="120px" style="border: 2px solid black;"> &nbsp;&nbsp;</td>		
+										@endforeach
 
+									</tr>
+									<tr>
+										@foreach ($RegPhotoDetails as $RegPhotoDetail)
+										<td style="font-size: 12px;text-align: center;">
+											<b>
+												@if ($RegPhotoDetail->party_type == 1)
+													First Party
+												@elseif($RegPhotoDetail->party_type == 2)
+													Second Party
+												@elseif($RegPhotoDetail->party_type == 3)
+													Witness
+												@endif
+											</b>
+										</td>		
+										@endforeach
+									</tr>
+								</table>				
+							</td>
 						</tr>
-						<tr>
-							@foreach ($RegPhotoDetails as $RegPhotoDetail)
-							<td style="font-size: 12px;text-align: center;">
-								<b>
-									@if ($RegPhotoDetail->party_type == 1)
-										First Party
-									@elseif($RegPhotoDetail->party_type == 2)
-										Second Party
-									@elseif($RegPhotoDetail->party_type == 3)
-										Witness
-									@endif
-								</b>
-							</td>		
-							@endforeach
-						</tr>
-					</table>	
+					</table>
+					
 				</td>
 			</tr> 
 			<tr>
