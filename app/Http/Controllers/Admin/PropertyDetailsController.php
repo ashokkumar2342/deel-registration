@@ -94,8 +94,8 @@ class PropertyDetailsController extends Controller
 
     public function index()
     {
-        $States = DB::select(DB::raw("select * from `states` order by `name_e`;"));
-        return view('admin.propertyDetails.index',compact('States'));
+      $States = DB::select(DB::raw("select * from `states` order by `name_e`;"));
+      return view('admin.propertyDetails.index',compact('States'));
     }
 
     public function store(Request $request)
@@ -113,7 +113,22 @@ class PropertyDetailsController extends Controller
         		// dd($values);
         		foreach ($values as $key => $value) {
         			if(trim($value->propertyid)!=''){
-                $SaveDatas= DB::select(DB::raw("call up_upload_property_excel ('$admin->id','$request->states','$request->district','$request->block','$request->village','$value->sno','$value->propertyid','$value->ownername','$value->ownernamehindi','$value->fathername','$value->owneraadhaar','$value->ownermobile','$value->totalarea','$value->builtuparea','$value->openarea','$value->pppfamilyid','$value->pppmemberid','$value->propertytype','$value->fh_name_hindi')"));     
+
+                $srno = trim($value->sno);
+                $propertyid = trim($value->propertyid);
+                $oname_e = ucwords(strtolower(trim($value->ownername)));
+                $oname_h = $value->ownernamehindi;
+                $fname_e = ucwords(strtolower(trim($value->fathername)));
+                $aadhar = trim($value->owneraadhaar);
+                $mobile = trim($value->ownermobile);
+                $tarea = trim($value->totalarea);
+                $barea = trim($value->builtuparea);
+                $oarea = trim($value->openarea);
+                $familyid = trim($value->pppfamilyid);
+                $memberid = trim($value->pppmemberid);
+                $propertytype = trim($value->propertytype);
+                $fname_h = $value->fh_name_hindi;
+                $SaveDatas= DB::select(DB::raw("call up_upload_property_excel ('$admin->id','$request->states','$request->district','$request->block','$request->village','$srno','$propertyid','$oname_e','$oname_h','$fname_e','$aadhar','$mobile','$tarea','$barea','$oarea','$familyid','$memberid','$propertytype','$fname_h')"));     
               }
         		  
         		}
