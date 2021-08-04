@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -236,7 +234,7 @@
 		<tbody>
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
-					आज दिनांक {{date('d-m-Y')}} दिन	{{$rday_hindi}} समय {{date('h-i')}} बजे
+					आज दिनांक {{date('d-m-Y')}} दिन	{{$rday_hindi}}
 				</td>
 			</tr>
 			<tr>
