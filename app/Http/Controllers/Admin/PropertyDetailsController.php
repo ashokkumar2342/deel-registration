@@ -132,6 +132,7 @@ class PropertyDetailsController extends Controller
     $VillagePhotoDetail->blocks_id=$request->block; 
     $VillagePhotoDetail->village_id=$request->village;
     $VillagePhotoDetail->party_type=$request->party_type;
+    $VillagePhotoDetail->tehsil_id=0; 
     $VillagePhotoDetail->photo_path=$savepath; 
     $VillagePhotoDetail->save(); 
     $response = array();
