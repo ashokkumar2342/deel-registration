@@ -3,15 +3,21 @@
 		<table style="padding:-2px">
 			<tbody>
 				<tr>
-					@foreach ($RegPhotoDetails as $RegPhotoDetail)
+					@foreach ($VillagePhotoDetails as $VillagePhotoDetail)
 					<td> 
 						<table style="border:1px solid black; font-size:11px;padding:-2px;width: 220;height: 120px">
 						<tbody>
 							<tr>
-								<td style="font-size: 12px"><b>First Party</b></td>
+								<td style="font-size: 12px"><b>
+									@if ($VillagePhotoDetail->party_type == 1)
+										First Party 
+									@elseif($VillagePhotoDetail->party_type == 3)
+										Witness
+									@endif
+								</b></td>
 							</tr>
 							<tr>
-								<td><img src="{{ route('admin.property.photo.capture.display',Crypt::encrypt($RegPhotoDetail->photo_path)) }}" width="240px" height="165px"  alt="" title="" /></td>
+								<td><img src="{{ route('admin.property.village.party.photo.display',Crypt::encrypt($VillagePhotoDetail->photo_path)) }}" width="240px" height="165px"  alt="" title="" /></td>
 							</tr> 
 						</tbody>
 						</table> 
@@ -21,7 +27,7 @@
 			</tbody> 
 		</table> 
 	</div>
-	<div class="col-lg-6" style="padding-left: 200px">
+	{{-- <div class="col-lg-6" style="padding-left: 200px">
 		<table class="table table-striped table-hover table-bordered">
 			<thead>
 				<tr>
@@ -43,7 +49,7 @@
 				@endforeach
 			</tbody>
 		</table> 
-	</div>
+	</div> --}}
 </div>
 
 

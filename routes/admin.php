@@ -150,6 +150,8 @@ Route::group(['middleware' => 'admin'], function() {
 	    Route::post('village-party-detail-store/{id?}', 'MasterController@villagePartyDetailStore')->name('admin.Master.village.party.detail.store');
 	    Route::get('village-party-detail-edit/{id?}', 'MasterController@villagePartyDetailEdit')->name('admin.Master.village.party.detail.edit');
 	    Route::get('village-party-detail-delete/{id?}', 'MasterController@villagePartyDetailDelete')->name('admin.Master.village.party.detail.delete');
+
+
 	    
 	    
 	    
@@ -195,6 +197,12 @@ Route::group(['middleware' => 'admin'], function() {
        Route::get('/', 'PropertyDetailsController@index')->name('admin.property.details.index');
        Route::post('store', 'PropertyDetailsController@store')->name('admin.property.details.store');
        Route::get('photo-capture-display/{path}', 'PropertyDetailsController@photoCaptureDisplay')->name('admin.property.photo.capture.display');
+
+
+       Route::get('village-party-photo', 'PropertyDetailsController@villagePartyPhoto')->name('admin.Master.village.party.photo');
+       Route::post('village-party-photo-store', 'PropertyDetailsController@villagePartyPhotoStore')->name('admin.Master.village.party.photo.store');
+       Route::get('village-party-photo-view', 'PropertyDetailsController@villagePartyPhotoView')->name('admin.property.village.party.photo.view');
+       Route::get('village-party-photo-display/{path}', 'PropertyDetailsController@villagePartyPhotoDisplay')->name('admin.property.village.party.photo.display');
            
 	 	 
     });

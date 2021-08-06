@@ -16,7 +16,7 @@
                 <form action="{{ route('admin.property.photo.capture.store') }}" method="post" class="add_form" no-reset="true" select-triger="property_select_box">
                         {{ csrf_field() }}
                     <div class="row">
-                        <div class="col-lg-6 form-group">
+                        <div class="col-lg-12 form-group">
                             <label>Property ID</label>
                             <select name="property_id" class="form-control" id="property_select_box" onchange="callAjax(this,'{{ route('admin.property.photo.capture.view') }}','image_view_div')">
                                 <option selected disabled>Select Property ID</option>
@@ -25,7 +25,7 @@
                                  @endforeach 
                             </select>
                         </div>
-                        <div class="col-lg-6 form-group">
+                        {{-- <div class="col-lg-6 form-group">
                             <label for="exampleInputEmail1">Party Type</label>
                             <span class="fa fa-asterisk"></span>
                             <select name="party_type" class="form-control">
@@ -33,7 +33,7 @@
                                 <option value="2">Second Party</option>
                                 <option value="3">Witness</option>
                             </select>
-                        </div>
+                        </div> --}}
                         <div id="image_view_div">
                             
                         </div>

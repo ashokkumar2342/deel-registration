@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Model\ReportType;
 use App\Model\TmpUploadProperty;
 use App\Model\RegPhotoDetail;
+use App\Model\VillagePhotoDetail;
 use App\Model\RegPartyDetail;
 use CodeItNow\BarcodeBundle\Utils\BarcodeGenerator;
 use Illuminate\Http\Request;
@@ -50,7 +51,7 @@ class PropertyDetailsController extends Controller
   {
     $rules=[ 
         'property_id' => 'required', 
-        'party_type' => 'required', 
+        
     ]; 
     $validator = Validator::make($request->all(),$rules);
     if ($validator->fails()) {
@@ -69,10 +70,10 @@ class PropertyDetailsController extends Controller
       $imagedata = file_get_contents($file);
       $encode = base64_encode($imagedata);
       $image=base64_decode($encode); 
-      $name =$request->property_id.'_'.$request->party_type;
+      $name =$request->property_id.'_'.'2';
       $savepath=$vpath.'/'.$name.'.jpg';
       $image= \Storage::disk('local')->put($savepath,$image);
-      DB::select(DB::raw("call `up_store_deed_photo_detail`('$admin->id','$request->property_id','$request->party_type','$savepath');"));
+      DB::select(DB::raw("call `up_store_deed_photo_detail`('$admin->id','$request->property_id','2','$savepath');"));
       $response = array();
       $response['status'] = 1;
       $response['msg'] = "Submit Successfully";
@@ -87,6 +88,75 @@ class PropertyDetailsController extends Controller
     $response=['status'=>$result[0]->result,'msg'=>$result[0]->message];
     return response()->json($response);  
     
+  }
+
+  public function villagePartyPhoto($value='')
+  {
+    $States = DB::select(DB::raw("select * from `states` order by `name_e`;"));
+    return view('admin.propertyDetails.villagePartyPhoto.index' ,compact('States'));
+  }
+  public function villagePartyPhotoStore(Request $request)
+  {
+    
+    $rules=[ 
+        'states' => 'required', 
+        'district' => 'required', 
+        'block' => 'required', 
+        'village' => 'required', 
+        
+        'party_type' => 'required', 
+    ]; 
+    $validator = Validator::make($request->all(),$rules);
+    if ($validator->fails()) {
+      $errors = $validator->errors()->all();
+      $response=array();
+      $response["status"]=0;
+      $response["msg"]=$errors[0];
+      return response()->json($response);// response as json
+    }
+    $admin=Auth::guard('admin')->user(); 
+    $dirpath = Storage_path() . '/app/camera_image';
+    $vpath = '/camera_image/'.date('dmY').'/'.$admin->id;
+    @mkdir($dirpath, 0755, true);
+    $file =$request->image;
+    $imagedata = file_get_contents($file);
+    $encode = base64_encode($imagedata);
+    $image=base64_decode($encode); 
+    $name =$request->property_id.'_'.$request->party_type;
+    $savepath=$vpath.'/'.$name.'.jpg';
+    $image= \Storage::disk('local')->put($savepath,$image);
+    $VillagePhotoDetail=VillagePhotoDetail::firstOrNew(['village_id'=>$request->village,'party_type'=>$request->party_type]);
+    $VillagePhotoDetail->user_id=$admin->id;
+    $VillagePhotoDetail->states_id=$request->states;
+    $VillagePhotoDetail->districts_id=$request->district;
+    $VillagePhotoDetail->blocks_id=$request->block; 
+    $VillagePhotoDetail->village_id=$request->village;
+    $VillagePhotoDetail->party_type=$request->party_type;
+    $VillagePhotoDetail->photo_path=$savepath; 
+    $VillagePhotoDetail->save(); 
+    $response = array();
+    $response['status'] = 1;
+    $response['msg'] = "Submit Successfully";
+    return $response;  
+  }
+  public function villagePartyPhotoView(Request $request)
+  {  
+    $VillagePhotoDetails=VillagePhotoDetail::where('village_id',$request->id)->get(); 
+    return view('admin.propertyDetails.villagePartyPhoto.image_view',compact('VillagePhotoDetails'));
+  }
+  public function villagePartyPhotoDisplay(Request $request,$path)
+  {
+    $path=Crypt::decrypt($path);
+    $storagePath = storage_path('app/'.$path);              
+    $mimeType = mime_content_type($storagePath); 
+    if( ! \File::exists($storagePath)){
+      return view('error.home');
+    }
+    $headers = array(
+      'Content-Type' => $mimeType,
+      'Content-Disposition' => 'inline; '
+    );            
+    return Response::make(file_get_contents($storagePath), 200, $headers); 
   }
 
   
