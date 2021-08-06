@@ -8,7 +8,15 @@
 						<table style="border:1px solid black; font-size:11px;padding:-2px;width: 220;height: 120px">
 						<tbody>
 							<tr>
-								<td style="font-size: 12px"><b>First Party</b></td>
+								<td style="font-size: 12px"><b>
+									@if ($RegPhotoDetail->party_type == 1)
+										First Party
+									@elseif($RegPhotoDetail->party_type == 2)
+										Second Party
+									@elseif($RegPhotoDetail->party_type == 3)
+										Witness
+									@endif
+								</b></td>
 							</tr>
 							<tr>
 								<td><img src="{{ route('admin.property.photo.capture.display',Crypt::encrypt($RegPhotoDetail->photo_path)) }}" width="240px" height="165px"  alt="" title="" /></td>
