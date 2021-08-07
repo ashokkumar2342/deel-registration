@@ -114,6 +114,8 @@ class PropertyDetailsController extends Controller
       $response["msg"]=$errors[0];
       return response()->json($response);// response as json
     }
+    $tehsils = DB::select(DB::raw("select * from `villages` where `id` = $request->village;"));
+    $teh_id = $tehsils[0]->tehsil_id;
     $admin=Auth::guard('admin')->user(); 
     $dirpath = Storage_path() . '/app/camera_image';
     $vpath = '/camera_image/'.date('dmY').'/'.$admin->id;
@@ -122,7 +124,7 @@ class PropertyDetailsController extends Controller
     $imagedata = file_get_contents($file);
     $encode = base64_encode($imagedata);
     $image=base64_decode($encode); 
-    $name =$request->property_id.'_'.$request->party_type;
+    $name =$request->village.'_'.$request->party_type;
     $savepath=$vpath.'/'.$name.'.jpg';
     $image= \Storage::disk('local')->put($savepath,$image);
     $VillagePhotoDetail=VillagePhotoDetail::firstOrNew(['village_id'=>$request->village,'party_type'=>$request->party_type]);
@@ -132,7 +134,7 @@ class PropertyDetailsController extends Controller
     $VillagePhotoDetail->blocks_id=$request->block; 
     $VillagePhotoDetail->village_id=$request->village;
     $VillagePhotoDetail->party_type=$request->party_type;
-    $VillagePhotoDetail->tehsil_id=0; 
+    $VillagePhotoDetail->tehsil_id=$teh_id; 
     $VillagePhotoDetail->photo_path=$savepath; 
     $VillagePhotoDetail->save(); 
     $response = array();

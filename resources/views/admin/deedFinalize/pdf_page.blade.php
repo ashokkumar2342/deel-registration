@@ -59,7 +59,7 @@
 			</tr>
 			<tr>
 				<td style="text-align: justify;padding-top: 20px;font-size: 16px">
-					This certificate /Deed of Title/Ownership is executed at <b>{{$tehsil[0]->name_e}}</b>  on <b>{{date('d')}} day of {{date('M - Y')}}</b>.	
+					This certificate /Deed of Title/Ownership is executed at <b>{{$tehsil[0]->name_e}}</b>  on <b>{{date_format($deed_date,'d')}} day of {{date_format($deed_date,'M - Y')}}</b>.	
 				</td>
 			</tr>
 			<tr>
@@ -100,7 +100,7 @@
 			</tr>
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
-					And whereas the First Party is agreed to certify that the said immovable property belongs to the second party in pursuance of his application dated <b>{{date('d.m.Y')}}</b> to be used as a site for residential/commercial purposes in the Lal Dora Area of Village <b>{{$village[0]->name_e}}</b> Tehsil <b>{{$tehsil[0]->name_e}}</b>,  District <b>{{$district[0]->name_e}}</b>.
+					And whereas the First Party is agreed to certify that the said immovable property belongs to the second party in pursuance of his application dated <b>{{date_format($deed_date,'d.m.Y')}}</b> to be used as a site for residential/commercial purposes in the Lal Dora Area of Village <b>{{$village[0]->name_e}}</b> Tehsil <b>{{$tehsil[0]->name_e}}</b>,  District <b>{{$district[0]->name_e}}</b>.
 				</td>
 			</tr>
 			<tr>
@@ -178,7 +178,7 @@
 
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
-					Signed by the Parties at <b>{{$tehsil[0]->name_e}}</b> on the <b>{{date('d')}} day of {{date('M - Y')}}</b>. First Party (acting under Resolution no <b>{{$resolution[0]->resolution_no}}</b> Dated <b>{{$resolution_date}}</b> on behalf of state Govt. of Haryana)
+					Signed by the Parties at <b>{{$tehsil[0]->name_e}}</b> on the <b>{{date_format($deed_date,'d')}} day of {{date_format($deed_date,'M - Y')}}</b>. First Party (acting under Resolution no <b>{{$resolution[0]->resolution_no}}</b> Dated <b>{{$resolution_date}}</b> on behalf of state Govt. of Haryana)
 				</td>
 			</tr>
 			<tr>
@@ -234,7 +234,7 @@
 		<tbody>
 			<tr>
 				<td style="text-align: justify;font-size: 16px">
-					आज दिनांक {{date('d-m-Y')}} दिन	{{$rday_hindi}}
+					आज दिनांक {{date_format($deed_date,'d-m-Y')}} दिन	{{$rday_hindi}}
 				</td>
 			</tr>
 			<tr>

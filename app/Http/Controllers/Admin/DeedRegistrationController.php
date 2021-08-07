@@ -249,7 +249,16 @@ class DeedRegistrationController extends Controller
         'nbpgSuffix' => ' पृष्ठों का पृष्ठ'
     ]);
 
-    $rday = date('N');
+
+    $deed_date_rs=DB::select(DB::raw("select * from `deed_date`;"));
+    if (count($deed_date_rs) > 0 ) {
+      $deed_date = date_create($deed_date_rs[0]->for_date);
+    }else{
+      $deed_date = date_create(date('Y-m-d'));
+    }
+    
+    $rday = date_format($deed_date,'N');
+    // $rday = date('N');
     $rday_hindi = '';
     if($rday == 1){
       $rday_hindi = 'सोमवार';
@@ -266,16 +275,19 @@ class DeedRegistrationController extends Controller
     }elseif($rday == 7){
       $rday_hindi = 'रविवार';
     }
-    $html = view('admin.deedFinalize.pdf_page',compact('c_property_id', 'RegPhotoDetails', 'village', 'tehsil', 'district', 'resolution', 'fisrtparty', 'secondparty', 'witness', 'propertyDetail', 'block', 'rday_hindi', 'resolution_date')); 
+    $html = view('admin.deedFinalize.pdf_page',compact('c_property_id', 'RegPhotoDetails', 'village', 'tehsil', 'district', 'resolution', 'fisrtparty', 'secondparty', 'witness', 'propertyDetail', 'block', 'rday_hindi', 'resolution_date', 'deed_date')); 
     $mpdf->WriteHTML($html);
 
 
-    $documentUrl = Storage_path() . '/app/deedFinalize/'.date('dmY').'/'.$admin->id;   
+    $documentUrl = Storage_path() . '/app/deedFinalize/'.date_format($deed_date,'dmY').'/'.$admin->id;   
+    // $documentUrl = Storage_path() . '/app/deedFinalize/'.date('dmY').'/'.$admin->id;   
     @mkdir($documentUrl, 0755, true);  
     $mpdf->Output($documentUrl.'/'.$c_property_id.'.pdf', 'F');
     
-    $file_path = '/deedFinalize/'.date('dmY').'/'.$admin->id.'/'.$c_property_id.'.pdf';
-    $reg_date = date('Y-m-d');
+    $file_path = '/deedFinalize/'.date_format($deed_date,'dmY').'/'.$admin->id.'/'.$c_property_id.'.pdf';
+    // $file_path = '/deedFinalize/'.date('dmY').'/'.$admin->id.'/'.$c_property_id.'.pdf';
+    $reg_date = date_format($deed_date,'Y-m-d');
+    // $reg_date = date('Y-m-d');
     $result = DB::select(DB::raw("call `up_deed_finalize`($admin->id, $deed_id, '$file_path', '$reg_date');"));
     $response=['status'=>$result[0]->result,'msg'=>$result[0]->message];
     return response()->json($response); 
